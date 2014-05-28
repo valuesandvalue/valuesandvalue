@@ -28,11 +28,11 @@ The CSS is based on bootstrap:
     
 External JavaScript libraries:
 
-    Countdown - http://countdownjs.org
-    D3 - http://d3js.org
-    Handlebars - http://handlebarsjs.com
-    jQuery - https://jquery.com
-    jQuery Picture - http://jquerypicture.com
+* Countdown - http://countdownjs.org
+* D3 - http://d3js.org
+* Handlebars - http://handlebarsjs.com
+* jQuery - https://jquery.com
+* jQuery Picture - http://jquerypicture.com
     
   
 Credits
