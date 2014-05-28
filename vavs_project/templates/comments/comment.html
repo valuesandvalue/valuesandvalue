@@ -1,0 +1,64 @@
+{# feeds/feed.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{% if object.display or user.is_staff %}
+    {{ object.body|truncatewords:6 }}
+{% else %}
+    Facebook Comments
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+<span class="category">Facebook </span>
+<span class="title">Comments</span>
+{% endblock page_title %}
+
+{% if object.display or user.is_staff %}
+    {% block page_subtitle %}
+    <h4 class="vavs-page-subtitle">{{ object.created|date:"l jS F Y" }}</h4>
+    <div class="text-center">
+        <p class="vavs-page-subtitle-info"><a class="vavs-btn" href="{% url 'current_comments'%}">View All Comments</a></p>
+    </div>
+    {% endblock page_subtitle %}
+
+    {% block content %}
+
+    {% if object.question_1 %}
+    <blockquote class="vavs-big-quote">How has Facebook influenced your friendships and how you interact with people?</blockquote>
+    {{ object.question_1 }}
+    {% endif %}
+    
+    {% if object.question_2 %}
+    <blockquote class="vavs-big-quote">What do like or dislike about Facebook?</blockquote>
+    {{ object.question_2 }}
+    {% endif %}
+    
+    {% if object.question_3 %}
+    <blockquote class="vavs-big-quote">How central is Facebook to your life?</blockquote>
+    {{ object.question_3 }}
+    {% endif %}
+    
+    {% if user.is_staff %}
+    <div class="text-center">
+        {% if object.name %}
+        <p>{{ object.name }}</p>
+        {% else %}
+        <p>Anonymous</p>
+        {% endif %}
+        {% if object.email %}
+        <p>{{ object.email }}</p>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    {% if user.is_staff %}
+    <p><a class="vavs-btn pull-right" href="{% url 'update_comment' object.pk %}">Edit</a></p>
+    {% endif %}
+
+    {% endblock %}
+{% else %}
+    <div class="text-center">
+    <p>This comment is not available.</p>
+    </div>
+{% endif %}

@@ -1,0 +1,12 @@
+{# emails/survey_result.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="font-size: larger; margin-bottom: 46px;">{{ respondent.pref_name }},</p>
+
+{% for answer in answers %}
+<p style="text-align: justify;"><b>{{ answer.question }}</b></p>
+<p style="text-align: justify;">{{ answer.text }}</p>
+{% empty %}
+<p style="text-align: justify;">Did not submit any responses.</p>
+{% endfor %}
+
+{% endblock content %}

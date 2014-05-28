@@ -1,0 +1,13 @@
+{# surveys/survey.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {{ survey.name }}
+{% endblock %}
+{% block page_title %}
+    <span class="title">{{ survey.name }}</span>
+{% endblock page_title %}
+{% block content %}
+{% crispy form %}
+
+{% endblock %}

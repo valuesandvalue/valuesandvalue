@@ -1,0 +1,9 @@
+{# emails/participation_confirmed.txt #}{% extends "emails/email_base.txt" %}{% block content %}Dear {{ name }},
+
+Thank you for offering to participate in Values & Value.
+
+Someone will be in touch with you soon to introduce you to the project.
+
+Yours sincerely,
+Values & Value
+{% endblock content %}

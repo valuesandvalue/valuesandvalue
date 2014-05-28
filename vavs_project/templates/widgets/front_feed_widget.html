@@ -1,0 +1,13 @@
+{# widgets/front_feed_widget.html #}
+<section class="vavs-md-box vavs-hide-img">
+<h3 class="vavs-item-header">
+<a href="{{ item.link }}">{{ item.title }}</a></h3>
+<p>
+<span class="vavs-btn-label">Source:</span> <a class="vavs-btn" href="{{ item.feed.get_absolute_url }}">{{ item.feed.name }}</a>
+</p>
+<div class="vavs-justify vavs-btm-12">{{ item.summary|safe|truncatewords_html:24 }}</div>
+<p>
+<a class="vavs-btn pull-left" href="{% url 'current_feeds' %}">Feeds &amp; Links</a>
+<a class="vavs-btn pull-right" href="{{ item.link }}">Read more</a>
+</p>
+</section>

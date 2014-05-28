@@ -1,0 +1,44 @@
+{# feeds/feed.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Take Part
+{% endblock %}
+
+{% block page_title %}
+<span class="title">Take Part</span>
+{% endblock page_title %}
+
+{% block content %}
+<p>For our research on modern digital relations we are looking for input and 
+participation from people using Facebook.</p>
+
+<p>There are two ways of being involved, as part of the detailed study, or 
+by sending us your 
+<a href="{% url 'current_comments' %}">comments on Facebook</a>.</p>
+
+<p>For the detailed study, we would like to follow your online Facebook 
+activity and the advertising that appears as you browse 
+the web, and interview you about your experiences with Facebook. This will take 
+place over a period of three months and to take part we will ask you to install 
+two pieces of software we have created for the project. You can read about 
+these on the <a href="{% url 'interactions_study' %}">software page</a>. All information 
+that we gather will be kept anonymous and you will have full private access to 
+this.</p>
+
+<p>To take part in the detailed study, or to find our more, please send us your 
+contact details using this form:</p>
+
+{% crispy form %}
+
+<p>We are also gathering poeple’s
+<a href="{% url 'current_comments' %}">comments on Facebook</a> which will 
+help inform the questions we will be asking as the research develops. You can 
+read and contribute to this on the 
+<a href="{% url 'current_comments' %}">Facebook Comments</a> page.</p>
+
+
+
+{% endblock %}
+

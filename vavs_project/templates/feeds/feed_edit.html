@@ -1,0 +1,16 @@
+{# feeds/feed_edit.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}Edit {{ object.title }}{% else %}Create Feed Reader{% endif %}
+{% endblock %}
+{% block page_title %}
+    {% if object %}
+        <span class="category">Edit: </span>
+        <span class="title">{{ object.title }}</span>
+    {% else %}Create Feed Reader{% endif %}
+{% endblock page_title %}
+{% block content %}
+{% crispy form %} 
+{% endblock %}

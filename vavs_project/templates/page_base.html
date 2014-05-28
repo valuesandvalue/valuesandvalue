@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block pagecontainer %}
+<div class="container">
+    {% if messages %}
+    <ul class="alerts">
+        {% for message in messages %}
+        <li id="message_{{ forloop.counter }}" 
+        {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+        {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div id="page-title">
+    <h1 class="vavs-page-title">{% block page_title %}{% endblock page_title %}</h1>
+    {% block page_subtitle %}{% endblock page_subtitle %}
+    </div>
+    
+    <div class="container">
+        <div class="vavs-main-column">
+            {% block content %}{% endblock content %}
+        </div>
+    </div>
+</div> <!-- /container -->
+{% endblock pagecontainer %}

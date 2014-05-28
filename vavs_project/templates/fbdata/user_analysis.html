@@ -1,0 +1,372 @@
+{# blog/item.html #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap_pagination %}
+
+{% block title %}
+{{ fbuser.user_name }}
+{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/rickshaw.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/narrative_lines.css' %}" rel="stylesheet">
+{% endblock extra_css %}
+
+{% block pagecontainer %}
+<div id="graph-controls">
+    <div class="graph-ctrlbox">
+    
+    <div class="graph-info">
+        {% if start %}
+            <span>{{ start|date:"l jS F Y" }} to  {{ end|date:"l jS F Y" }}</span>
+        {% else %}
+            <span>No data</span>
+        {% endif %}
+    </div>
+    
+    <div class="graph-pages">
+    {% if pager %}
+    <ul>
+    {% if pager.has_previous %}
+        <li><a href="{% url 'participant_data_paged' username=username page=pager.previous_page_number %}">&larr;</a></li>
+    {% endif %}
+    {% for pnum in pager.paginator.page_range %}
+        {% if pnum == pager.number %}
+        <li><strong><a href="{% url 'participant_data_paged' username=username page=pnum %}">{{ pnum }}</a></strong></li>
+        {% else %}
+        <li><a href="{% url 'participant_data_paged' username=username page=pnum %}">{{ pnum }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if pager.has_next %}
+        <li><a href="{% url 'participant_data_paged' username=username page=pager.next_page_number %}">&rarr;</a></li>
+    {% endif %}
+    </ul>
+    {% endif %}
+    </div>
+    
+    <div class="graph-tools">
+        
+        
+        <ul class="graph-buttons">
+            <li><a id="toggle-flows" href="."><img src="{% static 'img/flows_on.png' %}"></a></li>
+            <li><a id="toggle-users" href="."><img src="{% static 'img/users_on.png' %}"></a></li>
+            <li><a id="toggle-posts" href="."><img src="{% static 'img/posts_on.png' %}"></a></li>
+            <li><a id="toggle-fbads" href="."><img src="{% static 'img/fbads_on.png' %}"></a></li>
+            <li><a id="toggle-ads" href="."><img src="{% static 'img/ads_on.png' %}"></a></li>
+        </ul>
+        
+        <div class="graph-help">
+            <a id="show-help" href=".">Help</a>
+        </div>
+    </div>
+    
+    </div>
+</div>
+
+<div id="loading-panel"><span>Loading</span> <span id="ellipsis">...</span></div>
+
+<div id="interactions-graph"></div>
+
+<script>
+$(document).ready(function() { 
+    $('#loading-panel').hide();
+    $('#help-panel').hide();
+    $('#interactions-detail').hide();
+    
+    function swapBtn(ison, btn)   {
+        if (ison)    {
+            btn.attr("src", btn.attr("src").replace("_off","_on"));
+        } else {
+            btn.attr("src", btn.attr("src").replace("_on","_off"));
+        }
+    }
+    
+    var nlLoader = new NL.Loader({
+        viewSelector: "#loading-panel",
+    }); 
+    {% if not start %}
+    nlLoader.setText("We have not collected data for this account, please try later.");
+    {% endif %}
+    nlLoader.show();
+    
+    {% if start %}
+    var nlDetail = new NL.Detail({
+        dataURL: "https://{{ request.get_host }}/analysis/detail/{{ username }}/",
+        viewSelector: "#interactions-detail",
+        loader: nlLoader
+    }); 
+    var nlAdDetail = new NL.AdDetail({
+        dataURL: "https://{{ request.get_host }}/admonitor/hour/{{ username }}/",
+        viewSelector: "#interactions-detail",
+        loader: nlLoader
+    });   
+    var nlFbAdDetail = new NL.FbAdDetail({
+        dataURL: "https://{{ request.get_host }}/admonitor/detail/{{ username }}/",
+        viewSelector: "#interactions-detail",
+        loader: nlLoader
+    });
+    var nlGraph = new NL.Graph({
+        dataURL: "https://{{ request.get_host }}{% url 'fb_interactions' username=username start=start.isoformat end=end.isoformat %}",
+        viewSelector: "#interactions-graph",
+        detailView: nlDetail,
+        adView: nlAdDetail,
+        fbAdView: nlFbAdDetail,
+        width: 2000,
+        height: 600,
+        loader: nlLoader
+    });
+    
+    $('body').on('click', '#toggle-flows', function(event) {
+        event.stopPropagation();
+        swapBtn(nlGraph.toggleSingleUsers(event), $("#toggle-flows img"));
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-users', function(event) {
+        event.stopPropagation();
+        swapBtn(nlGraph.toggleUsers(event), $("#toggle-users img"));
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-posts', function(event) {
+        event.stopPropagation();
+        swapBtn(nlGraph.togglePosts(event), $("#toggle-posts img"));
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-ads', function(event) {
+        event.stopPropagation();
+        swapBtn(nlGraph.toggleAds(event), $("#toggle-ads img"));
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-fbads', function(event) {
+        event.stopPropagation();
+        swapBtn(nlGraph.toggleFbAds(event), $("#toggle-fbads img"));
+        return false;
+    });
+    {% else %}
+    swapBtn(false, $("#toggle-users img"));
+    swapBtn(false, $("#toggle-posts img"));
+    swapBtn(false, $("#toggle-ads img"));
+    swapBtn(false, $("#toggle-fbads img"));
+    
+    $('body').on('click', '#toggle-users', function(event) {
+        event.stopPropagation();
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-posts', function(event) {
+        event.stopPropagation();
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-ads', function(event) {
+        event.stopPropagation();
+        return false;
+    });
+    
+    $('body').on('click', '#toggle-fbads', function(event) {
+        event.stopPropagation();
+        return false;
+    });
+    {% endif %}
+    
+    $('body').on('click', '#show-help', function(event) {
+        event.stopPropagation();
+        $('#help-panel #detail-head').height(60);
+	    $('#help-panel').css({
+	        top: $(window).scrollTop() + 40,
+	        left: $(window).scrollLeft() + $(window).width()*0.125,
+	        height: $(window).height() - 80,
+	        width: $(window).width()*0.75
+	    });
+	    $('#help-panel #help-content').height(
+	              $('#help-panel').height() - 
+	              $('#help-panel #detail-head').height());
+        $('#help-panel').show();
+        return false;
+    });
+    
+    $('.close-btn img').hover(
+        function() { this.src = this.src.replace("_lo", "_hi");}, 
+        function() { this.src = this.src.replace("_hi", "_lo");}
+    );
+    
+    $('body').on('click', '#help-panel #detail-ctrls .close-btn', function(event) {
+        event.stopPropagation();
+        $('#help-panel').hide();
+        return false;
+    });
+});
+
+</script>
+
+<div id="interactions-detail" class="graph-detail">
+    <div id="detail-head">
+        <div id="detail-info"></div>
+        <div id="detail-ctrls"><a class="close-btn" alt="Close" href=""><img src="{% static 'img/close_lo.png' %}"></a></div>
+    </div>
+    <div id="detail-content"></div>
+</div>
+
+<div id="help-panel" class="graph-detail">
+    <div id="detail-head">
+        <div id="help-info"><h4>Help</h4></div>
+        <div id="detail-ctrls"><a class="close-btn" alt="Close" href=""><img src="{% static 'img/close_lo.png' %}"></a></div>
+    </div>
+    <div id="help-content">
+<h5>Using the graph</h5>
+
+<p>The graph shows a visualisation of Facebook activity in terms of the flows of interaction between users combined with data from advertising that will have been fed to your Facebook account and as you browse the web.</p>
+
+<p class="vavs-img">
+    <img src="{% static 'img/graph_labeled.png' %}">
+    <span class="img-caption">The different elements of the visualisation.</span>
+</p>
+
+<p>Users are shown by the coloured wavy lines. The different types of posts, photos, status messages, etc., that you have interacted with on Facebook are shown as vertical boxes with dark outlines.</p> 
+
+<p>Sponsored stories on Facebook are shown as the larger circles with blue outlines. Adverts, such as the ones that appear in the sidebar of your Facebook page, are shown as smaller circles with blue outlines.</p>
+
+<p>The grey bars in the background give an indication of how much advertising has been detected. Each bar represents one hour.</p>
+
+<p>The four buttons at the top of the screen allow you to switch the display of each of these on and off:</p>
+
+<table class="icon-table">
+<tr>
+<td class="icon-table-img"><img src="{% static 'img/flows_on.png' %}"></td><td>hides users only linked with one posting</td>
+</tr>
+<tr>
+<td class="icon-table-img"><img src="{% static 'img/users_on.png' %}"></td><td>turns users on and off</td>
+</tr>
+<tr>
+<td class="icon-table-img"><img src="{% static 'img/posts_on.png' %}"></td><td>turns Facebook posts on and off</td>
+</tr>
+<tr>
+<td class="icon-table-img"><img src="{% static 'img/fbads_on.png' %}"></td><td>turns Facebook adverts on and off</td>
+</tr>
+<tr>
+<td class="icon-table-img"><img src="{% static 'img/ads_on.png' %}"></td><td>turns web advertising data on and off</td>
+</tr>
+</table>
+
+<p>This enables you to see different parts of the visualisation more clearly where several layers are overlapping.</p>
+
+<p>By clicking on the boxes, bars and circles you can see more detailed information related to that item. If you have difficulty clicking on a specific item, use the display buttons as described above to turn off the other layers.</p>
+
+
+<h5>Detailed views</h5>
+
+<h6>Facebook posts</h6>
+
+<p>For Facebook posts, the detail shows information such as who sent it, the time at which it was sent and how long other users interacted with it. A graph below this shows a timeline of when different people commented on a post, shown with the coloured boxes, and who liked or was tagged in a post. A like is shown as a small coloured circle next to the person's name, and a tag as a small coloured box. Comments are shown as the larger coloured boxes. When you move your mouse over a box the message in the comment is displayed.</p>
+
+<p class="vavs-img">
+    <img src="{% static 'img/detail_post.png' %}">
+    <span class="img-caption">Detail view for a Facebook post, the coloured boxes show user comments.</span>
+</p>
+
+<h6>Sponsored Stories and Facebook Ads</h6>
+
+<p>The detail view for sponsored stores and adverts on Facebook shows the date, content and image for the story or advert.</p>
+
+<p class="vavs-img">
+    <img src="{% static 'img/detail_fbsp.png' %}">
+    <span class="img-caption">Detail view for a Sponsored Story on Facebook.</span>
+</p>
+
+<p class="vavs-img">
+    <img src="{% static 'img/detail_fbad.png' %}">
+    <span class="img-caption">Detail view for a sidebar advert on Facebook.</span>
+</p>
+
+<h6>Web Advertising</h6>
+
+<p>For web advertising, the detail view shows the connection between advertising companies and sites you have visited. The names down the left-hand side of the graph are the domain names of advertising and tracking sites. The names along the bottom are the domain names for websites you have visited. The red circles give an indication of how much content a particular advertising or tracking domain had on each of the sites you visited. If you move the mouse over a circle the exact amount of content will be shown. This includes now only adverts you may have seen but also hidden content that has been used by these companies to track your web browsing.</p>
+
+<p>Sometimes an advertising company shows up in the visited sites list. This happens because some forms of advertising include content from other advertisers.</p>
+
+<p class="vavs-img">
+    <img src="{% static 'img/detail_ads.png' %}">
+    <span class="img-caption">Detail view for web advertising, the visted websites have been anonimized.</span>
+</p>
+
+<h5>Privacy</h5>
+
+<p>The visualisations and graphs are only available to users registered with the Values & Value website. Users only have access to their own data and are not able to see others.</p> 
+
+<p>The researchers are able to see the data for all participants but only in an anonymized form. Users's real names are replaced with random fictitious names and no content from Facebook posts, such as messages, or photos, are shown to researchers. The researchers are therefore able to see the patterns of interaction between users but without knowing who is who or what the content of this is.</p>
+
+<p>The images and content from sponsored stories and advertising on Facebook is visible to researchers as this does not contain any personal information.</p>
+
+<p>When viewing the web advertising data the researchers are able to see the names of the advertising companies but not the actual websites visited by participants.</p>
+
+<p>It may be that during the study the researchers need to see some of the content from your Facebook activity, for example to discuss a specific posting or series of events that are relevant to the study. In this case the researchers will either meet with you in person, if doing an interview, or request that you turn off the anonymization for your data. This is controlled by a setting in your personal profile which only you have access to.</p>
+
+<p>At the end of the project, all personal data such as names and the content of Facebook postings will be erased and only the anonymized version of the data will be retained.</p>
+
+<p>You also have the right to withdraw from the project at any time and have all of your data completely removed. If you wish to do this, please contact the research team from the <a href="/contact/" target="_blank">contact page</a> or by email.</p>
+    </div>
+</div>
+
+{% endblock pagecontainer %}
+
+{% block extra_js %}
+{# templates #}
+{% verbatim %}
+<script id="detail-info-html" type="text/x-handlebars-template">
+<h4>{{ heading }}</h4>
+{{#if description}}
+<h5>{{ description }}</h5>
+{{/if}}
+    
+<ul class="detail-info fb-info">
+    <li>{{ from }}</li>
+    <li>{{ created }}</li>
+    {{#if duration}}
+    <li>Duration: {{ duration }} (Ended: {{ ended }})</li>
+    {{/if}}
+    
+    {{#if link}}
+    <li><a href="{{ link }}" target="_blank">Link to source item.</a></li>
+    {{/if}}
+</ul>
+</script>
+<script id="ad-info-html" type="text/x-handlebars-template">
+<h4>Web Advertising</h4>
+<h5>{{ date }}</h5>
+</script>
+    
+<script id="fbad-info-html" type="text/x-handlebars-template">
+<h4>{{ heading }}</h4>
+<h5>{{ title }}</h5>
+<p class="detail-date">{{ date }}</p>
+</script>
+
+<script id="fbad-content-html" type="text/x-handlebars-template">
+{{#if images}}
+<div class="image-box">
+{{#each images}}
+<img src="{% endverbatim %}{{ MEDIA_URL }}{% verbatim %}{{this}}">
+{{/each}}
+</div>
+{{/if}}
+
+{{#if text}}
+<p>{{ text }}</p>
+{{/if}}
+</script>
+{% endverbatim %}
+
+<script src="{% static 'js/d3.min.js' %}"></script>
+<script src="{% static 'js/countdown.min.js' %}"></script>
+<script src="{% static 'js/handlebars-v1.3.0.js' %}"></script>
+<script src="{% static 'js/narrative_lines.js' %}"></script>
+<script type="text/javascript">
+    $(window).scroll(function(){
+        $('#footer').css('left',$(window).scrollLeft());
+        {# $('#page-title').css('left',$(window).scrollLeft()); #}
+    });
+</script>
+{% endblock extra_js %}

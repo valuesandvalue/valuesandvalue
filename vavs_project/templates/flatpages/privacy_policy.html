@@ -1,0 +1,60 @@
+{# flatpages/privacy_policy.html #}
+{% extends "page_base.html" %}
+
+{% block title %}Data Collection and Privacy Policy{% endblock %}
+
+{% block page_title %}Data Collection and Privacy Policy{% endblock page_title %}
+
+{% block content %}
+<div class="text-center">
+
+<p>All participants are requested to provide consent before any data is collected. The terms of consent are as follows:</p>
+
+<div class="text-left">
+<ol class="vavs-consent">
+<li>I consent to be included in the project.</li>
+<li>I confirm that the study has been explained to me and that I have had the opportunity to ask questions. Please contact either Simon Yuill or Beverley Skeggs if you have any questions/queries. You can reach them through our <a href="/contact/">contact</a> page.</li>
+<li>I understand that my participation is voluntary and that I am free to withdraw at any time, without giving any reason.</li>
+<li>I understand that the information I give in the interview will be confidential unless it is impossible to do so (via social media) and that I will remain anonymous where possible. If I prefer a pseudonym I will provide one.</li>
+<li>I understand that confidentiality will be breached if I reveal matters that I later request to be withdrawn.</li>
+<li>I agree that my interview(s) may be used by the researchers for the purposes of the research report, publications associated with the project, and the dissemination of research findings.</li>
+<li>I agree for any interviews I give to be recorded if necessary.</li>
+<li>I give my permission for the transcripts of the interviews to be stored by the research council database and understand that transcripts will not have my name attached, and all identifying material (such as names) will be changed or deleted.</li>
+</ol>
+</div>
+
+<p>The visualisations and graphs are only available to users registered with the Values &amp; Value website. Users only have access to their own data and are not able to see others.</p> 
+
+<p>The researchers are able to see the data for all participants but only in an anonymized form. Users' real names are replaced with random fictitious names and no content from Facebook posts, such as messages, comments, or photos, are shown to researchers. The researchers are therefore able to see the patterns of interaction between users but without knowing who is who or what the content of this is.</p>
+
+<p>The images and content from Sponsored Stories and advertising on Facebook is visible to researchers as this does not contain any personal information originating from participants themselves.</p>
+
+<p>The web advertising data includes the URLS of the adverts and the domain name of the site that it was displayed on, but does not collect the specific URL of the page itself. For example, if the software detects an advert from GoogleAds on a page with a URL such as <em>http://www.example.com/pages/content.html</em> it will only store the domain name for the page, i.e.: <em>http://www.example.com</em> Any images collected from web advertising will be deleted at the end of the project.
+
+<p>When viewing the web advertising data the researchers are able to see the names of the advertising companies but not the actual websites visited by participants, these are given anonymized ID numbers instead.</p>
+
+<p>It may be that during the study the researchers need to see some of the content from your Facebook activity, for example to discuss a specific posting or series of events that are relevant to the study. In this case the researchers will either meet with you in person, if doing an interview, or request that you turn off the anonymization for your data. This is controlled by a setting in your personal profile which only you have access to.</p>
+
+<p>At the end of the project, all personal data such as names and the content of Facebook postings will be erased and only the anonymized version of the data will be retained.</p>
+
+<p>The data that will be made available in the public data set at the end of the research will contain the following:</p>
+
+<div class="text-left">
+<ul class="vavs-consent">
+<li>A list of anonymized users in the form of a randomy generated fictitious name and an ID number that is unique to this project.</li>
+<li>A list of anonymized Facebook posts in the form of an ID number for each post that is unique to this project, the original date of the post, the type of post (ie status, photo, video, etc), a list of anonymized users who have interacted with it, the number of likes it received, the dates and anonymized user IDs of comments (but not the actual comments themselves), and the number of external URLs listed in the post (but not the actual URLs).</li>
+<li>A list of anonymized Facebook Sponsored Stories in the form of an ID number for each story that is unique to this project, the original date of the story, and an ID for each anonymized user who received it.</li>
+<li>A list of anonymized Facebook ads in the form of an ID number for each advert that is unique to this project, the original date of the advert, and an ID for each anonymized user who received it.</li>
+<li>A list of anonymized web advertising data in the form of an ID number for each advert that is unique to this project, the original date of the advert, and an ID for each anonymized user who received it, the domain name of the advertiser, and an anonymized identifier for the domain name where it was shown.</li>
+<li>Sets of data showing patterns and statistics relating to the anonymized data described above.</li>
+<li>Anonymized versions of the input received in the <a href="{% url 'survey' 1 %}">Facebook Survey</a> and <a href="{% url 'current_comments' %}">Facebook Comment</a> questionnaires.</li>
+<li>Where appropriate, quotations from participants given through interview with the consent and appropriate anonymization as agreed between the researchers and participant.</li>
+<li>All other data collected during the project will be permanantly erased, unless otherwise agreed between the researchers and the relevant participants.</li>
+</ul>
+</div>
+
+<p>If any changes are made to this during the project we will update the listing here and contact all participants to notify them of this and re-confirm their consent.</p>
+
+<p>You also have the right to withdraw from the project at any time and have all of your data completely removed. If you wish to do this, please contact the research team from the <a href="/contact/" target="_blank">contact page</a> or by email.</p>
+</div>
+{% endblock %}

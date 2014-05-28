@@ -1,0 +1,46 @@
+{# links/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Links{% endblock %}
+
+{% block page_title %}Links{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'create_page_link' %}">Add new link</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="page_links_paginated" %}
+{% endif %}
+</div>
+
+{% for pagelink in object_list %}
+<article>
+    <header>
+        <h1>{{ pagelink.name }}</h1>
+    </header>
+    {% if pagelink.description %}
+        <p>{{ pagelink.description|safe }}</p>
+    {% endif %}
+    <a href="{{ pagelink.url }}">{{ pagelink.url }}</a>
+</article>
+{% empty %}
+<div class="text-center"><p>There are currently no items here.</p></div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="page_links_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

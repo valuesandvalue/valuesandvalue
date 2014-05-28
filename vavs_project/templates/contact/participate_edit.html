@@ -1,0 +1,19 @@
+{# contact/participate_edit.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Participants{% endblock %}
+
+{% block page_title %}
+<span class="title">Participants</span>
+{% endblock page_title %}
+
+{% block page_subtitle %}
+<div class="text-center">
+    <p class="vavs-page-subtitle-info"><a class="vavs-btn" href="{% url 'participant_index'%}">View All Participants</a></p>
+</div>
+{% endblock page_subtitle %}
+
+{% block content %}
+{% crispy form %}
+{% endblock %}

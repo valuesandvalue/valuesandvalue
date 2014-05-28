@@ -1,0 +1,12 @@
+{# emails/message_received.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="text-align: justify;">Message from: {{ name }}</p>
+{% if email %}
+<p style="text-align: justify;">Email: {{ email }}</p>
+{% endif %}
+<p style="text-align: justify;">Message:</p>
+
+<blockquote style="margin-bottom: 46px;">
+<p style="text-align: justify;">{{ message }}</p>
+</blockquote>
+{% endblock content %}

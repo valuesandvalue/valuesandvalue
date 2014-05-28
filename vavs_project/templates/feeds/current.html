@@ -1,0 +1,61 @@
+{# feeds/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Feeds &amp; Links{% endblock %}
+
+{% block page_title %}Feeds &amp; Links{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'create_external_feed' %}">Add new feed</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_feeds_paginated" %}
+{% endif %}
+</div>
+
+{% for extfeed in object_list %}
+<article class="feeds">
+    <header>
+        <h1>
+        {% if extfeed.site %}
+            <a target="_blank" href="{{ extfeed.site }}">{{ extfeed.name }}</a>
+        {% else %}
+            <a target="_blank" href="{{ extfeed.url }}">{{ extfeed.name }}</a>
+        {% endif %}
+        </h1>
+    </header>
+    {% if extfeed.site %}
+        <p><a target="_blank" href="{{ extfeed.site }}">{{ extfeed.site }}</a></p>
+    {% endif %}
+    {% if extfeed.description %}
+        <p class="description">{{ extfeed.description|safe }}</p>
+    {% endif %}
+    <ul>
+    {% for entry in extfeed.recent_entries %}
+        <li><a target="_blank" href="{{ entry.link }}">{{ entry.title }}</a></li>
+    {% endfor %}
+    </ul>
+</article>
+{% empty %}
+<div class="text-center">
+<p>There are currently no external feeds.</p>
+</div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_feeds_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

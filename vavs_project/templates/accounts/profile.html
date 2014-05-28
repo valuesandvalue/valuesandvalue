@@ -1,0 +1,114 @@
+{# accounts/profile.html #}
+{% extends "page_base.html" %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{% if user.is_staff %}
+{{ user.username }}
+{% else %}
+{{ profile.facebook_name }}
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+
+{% if user.is_staff %}
+<span class="title">{{ user.username }}</span>
+{% else %}
+<span class="title">{{ profile.facebook_name }}</span>
+{% endif %}
+{% endblock page_title %}
+
+{% block page_subtitle %}
+{% if user.is_staff %}
+<h4 class="vavs-page-subtitle">project staff</h4>
+{% else %}
+<h4 class="vavs-page-subtitle">project participant</h4>
+{% endif %}
+{% endblock page_subtitle %}
+
+{% block content %}
+
+{% if user.is_staff %}
+    <p>Last logged in on 
+    {{ user.last_login|date:"l jS F Y" }} at {{ user.last_login|date:"fa" }}</p>
+
+    {% if surveys %}
+    <h2>Surveys</h2>
+    {% for survey in surveys %}
+    <div class="clear-break"><strong>{{ survey.name }}</strong> - {{ survey.created }} <span class="pull-right"><a href="{% url 'survey_data' survey.id %}">view data</a></span></div>
+    {% endfor %}
+    {% endif %}
+    
+    {% if participants %}
+    <h2>Participants</h2>
+    {% for participant in participants %}
+    <div class="clear-break">{{ participant.username }} <span class="pull-right"><a href="{% url 'participant_data_named' participant.username %}">view data</a></span></div>
+    {% endfor %}
+    {% endif %}
+
+{% else %}
+    <p><a href="{{ profile.facebook_profile_url }}">
+    <img src="{{ profile.image.url }}" width="180" height="180">
+    </a></p>
+    
+    <h2 class="push-down-48">Personal Profile</h2>
+    
+    <p>Last logged in to Values &amp; Value on
+    {{ user.last_login|date:"l jS F Y" }} at {{ user.last_login|date:"fa" }}</p>
+    
+    <p>Facebook page: <a href="{{ profile.facebook_profile_url }}">{{ profile.facebook_profile_url }}</a></p>
+    
+    <h2>Using the Site</h2>
+    <p>Click on your username in the top-right corner of the page to view the user menu.</p>
+    
+    <img src="{% static 'img/user_menu.png' %}">
+    
+    <p>The available options are:</p>
+    <table class="vavs-table">
+    <tr>
+    <td class="col-120"><strong><a href="{% url 'profile' %}">Profile</a></strong></td>
+    <td>Takes you to this page, your user profile.</td>
+    </tr>
+    <tr>
+    <td class="col-120"><strong><a href="{% url 'participant_data' %}">Interactions</a></strong></td>
+    <td>Takes you to the visualisation page for your data in the <a href="{% url 'interactions_study' %}">Facebook Interactions</a> study.</td>
+    </tr>
+    <tr>
+    <td class="col-120"><strong><a href="{% url 'setup_apikey' %}">Admonitor</a></strong></td>
+    <td>Instructions on installing and using the Admonitor Add-on.</td>
+    </tr>
+    <tr>
+    <td class="col-120"><strong><a href="{% url 'logout' %}">Logout</a></strong></td>
+    <td>Logout from the site.</td>
+    </tr>
+    </table>
+    
+    <p>Please <a href="/contact/">contact us</a> if you have any problems with using the site.</p>
+
+    <h2>Facebook Interactions</h2>
+    
+    <p>Data gathered from {{ participant.start_time|date:"l jS F Y" }} to {{ participant.end_time|date:"l jS F Y" }}</p>
+    
+    <div class="text-center push-down-48">
+    <a class="btn btn-primary button white btn-lg" href="{% url 'participant_data' %}">View most recent data</a>
+    </div>
+
+    
+    <h2 class="push-down-48">Surveys</h2>
+    {% if surveys %}
+    {% for survey, respondent in surveys.items %}
+    <div class="clear-break"><strong>{{ survey.name }}</strong> - {{ survey.created }} <span class="pull-right"><a href="{% url 'respondent' survey.id respondent.id %}">responses</a></span></div>
+    {% endfor %}
+    {% else %}
+    <p>Would you like to take part in the <a href="{% url 'survey' 1 %}">Facebook Survey</a>?</p>
+    {% endif %}
+{% endif %}
+
+{% if form %}
+<h2>Settings</h2>
+{% crispy form %}
+{% endif %}
+
+{% endblock %}

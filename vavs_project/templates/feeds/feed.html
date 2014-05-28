@@ -1,0 +1,43 @@
+{# feeds/feed.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{% if object.active or user.is_staff %}
+    {{ object.name }}
+{% else %}
+    Feed not available
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+{% if object.active or user.is_staff %}
+{% if object.category %}
+    <span id="category">{{ object.category }}:</span>
+{% endif %}
+    <span id="title">{{ object.name }}</span>
+{% else %}
+    Feed not available
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% if not object.active and user.is_staff %}
+    <p>This item is hidden from display.</p>
+{% endif %}
+
+{% if object.active or user.is_staff %}
+    <p><a href="{{ object.url }}">{{ object.url }}</a></p>
+    <p>{{ object.description }}</p>
+    {% if object.updated %}
+        <p>Last updated: {{ object.updated|date:"l jS F Y" }}</p>
+    {% endif %}
+{% else %}
+    <p>This feed is not available for viewing.</p>
+{% endif %}
+
+{% if user.is_staff %}
+<p><a href="{% url 'update_external_feed' object.pk %}">Edit</a></p>
+{% endif %}
+
+{% endblock %}

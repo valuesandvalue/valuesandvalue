@@ -1,0 +1,38 @@
+{# addata/user_data.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{{ username }}
+{% endblock %}
+
+{% block page_title %}
+{{ username }}
+{% endblock page_title %}
+
+{% block content %}
+
+{% if fbsponsored %}
+    <ul>
+    {% for item in fbsponsored %}
+        <li><span>{{ item.timestamp|date:"h:i:s a l jS F Y" }}</span><span>{{ item.title }}</span></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if fbads %}
+    <ul>
+    {% for item in fbads %}
+        <li><span>{{ item.timestamp|date:"h:i:s a l jS F Y" }}</span><span>{{ item.title }}</span></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% if ads %}
+    <ul>
+    {% for item in ads %}
+        <li><span>{{ item.date|date:"h:i:s a l jS F Y" }}</span><span>{{ item.ref_domain }}</span><span>{{ item.domain }}</span><span>{{ item.content_type }}</span></li>
+    {% endfor %}
+    </ul>
+{% endif %}
+
+{% endblock %}

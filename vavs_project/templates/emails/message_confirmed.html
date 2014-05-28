@@ -1,0 +1,19 @@
+{# emails/message_confirmed.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="font-size: larger; margin-bottom: 46px;">Dear {{ name }},</p>
+
+<p style="text-align: justify;">Thank you for your message.</p>
+
+<p style="text-align: justify;">If it requires a response someone will be in back touch with you soon.</p>
+
+<p style="text-align: justify;">A copy of your message is below.</p>
+
+<p style="font-size: larger; margin-bottom: 46px; margin-top: 46px;">Yours sincerely,<br>
+Values & Value</p>
+
+<p style="text-align: justify;">Your original message:</p>
+
+<blockquote style="margin-bottom: 46px;">
+<p style="text-align: justify;">{{ message }}</p>
+</blockquote>
+{% endblock content %}

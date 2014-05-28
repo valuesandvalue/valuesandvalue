@@ -1,0 +1,2 @@
+{# blog/feed_description.txt #}
+{{ obj.bodyhtml|safe|truncatewords_html:24 }}

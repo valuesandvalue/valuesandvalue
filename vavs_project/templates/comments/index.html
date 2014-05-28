@@ -1,0 +1,62 @@
+{# comments/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Facebook Comments{% endblock %}
+
+{% block page_title %}
+<span class="category">Facebook </span>
+<span class="title">Comments</span>
+{% endblock page_title %}
+
+{% block content %}
+<div class="vavs-section-block">
+<blockquote class="vavs-big-quote">How has Facebook influenced your friendships and how you interact with people?</blockquote>
+<blockquote class="vavs-big-quote">What do like or dislike about Facebook?</blockquote>
+<blockquote class="vavs-big-quote">How central is Facebook to your life?</blockquote>
+
+<p>We are gathering people's experiences from Facebook. Below are some comments other people have sent us. Do please add your own experiences. We will use these to inform the questions we will ask in our research.</p>
+
+<p>If you prefer to be anonymous that’s fine. If you would like your comments attributed in any of our research please add your name.<p>
+
+<div class="text-center push-down-48">
+    <a class="btn btn-primary button white btn-lg" href="{% url 'create_comment' %}">Tell us your experience</a>
+</div>
+</div>
+
+
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_comments_paginated" %}
+{% endif %}
+</div>
+
+{% for object in object_list %}
+<article class="comments">
+    {% if object.question_1 %}<p>{{ object.question_1 }}</p>{% endif %}
+    {% if object.question_2 %}<p>{{ object.question_2 }}</p>{% endif %}
+    {% if object.question_3 %}<p>{{ object.question_3 }}</p>{% endif %}
+    <footer>
+    {% if user.is_staff %}
+    <p>
+        <a class="vavs-btn pull-left" href="{% url 'delete_comment' object.pk %}">Delete</a>
+        <a class="vavs-btn pull-right" href="{% url 'update_comment' object.pk %}">Edit</a>
+    </p>
+    {% endif %}
+    </footer>
+</article>
+{% empty %}
+<div class="text-center">
+<p><i>There are currently no comments.</i></p>
+</div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_comments_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

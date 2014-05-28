@@ -1,0 +1,49 @@
+{# blog/item.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{% if object.display or user.is_staff %}
+    {{ object.title }}
+{% else %}
+    Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+{% if object.display or user.is_staff %}
+{% if object.category %}
+    <span class="category">{{ object.category }}: </span>
+{% endif %}
+    <span class="title">{{ object.title }}</span>
+{% else %}
+Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_subtitle %}
+<h4 class="vavs-page-subtitle">
+{% if object.display_date %}
+    {{ object.display_date|date:"l jS F Y" }}
+{% else %}
+    {{ object.created|date:"l jS F Y" }}
+{% endif %}
+</h4>
+{% endblock page_subtitle %}
+
+{% block content %}
+
+{% if not object.display and user.is_staff %}
+    <p>This item is hidden from display.</p>
+{% endif %}
+
+{% if object.display or user.is_staff %}
+    {{ object.bodyhtml|safe }}
+{% else %}
+    <p>This item is not available for viewing.</p>
+{% endif %}
+
+{% if user.is_staff %}
+<p><a class="vavs-btn pull-right" href="{% url 'update_blog_item' object.pk %}">Edit</a></p>
+{% endif %}
+
+{% endblock %}

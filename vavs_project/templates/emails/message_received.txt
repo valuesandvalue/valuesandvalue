@@ -1,0 +1,9 @@
+{# emails/message_received.txt #}{% extends "emails/email_base.txt" %}{% block content %}Message from: {{ name }}
+
+{% if email %}Email: {{ email }}{% endif %}
+
+Message:
+
+{{ message }}
+
+{% endblock content %}

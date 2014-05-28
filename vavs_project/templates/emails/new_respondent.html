@@ -1,0 +1,11 @@
+{# emails/new_respondent.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="font-size: larger; margin-bottom: 46px;">New Respondent</p>
+
+<p>Name: {{ respondent.name }}</p>
+<p>Date: {{ respondent.created }}</p>
+<p>Email: {% if respondent.email %}{{ respondent.email }}{% else %}no email{% endif %}</p>
+<p>Pseudonym: {% if respondent.pseudonym %}{{ respondent.pseudonym }}{% else %}no pseudonym{% endif %}</p>
+<p>Further contact: {% if respondent.further_contact %}yes{% else %}no{% endif %}</p>
+
+{% endblock content %}

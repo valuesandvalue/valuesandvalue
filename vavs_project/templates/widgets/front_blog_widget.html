@@ -1,0 +1,17 @@
+{# widgets/front_blog_widget.html #}
+<section class="vavs-md-box vavs-hide-img">
+<h3 class="vavs-item-header">
+<a href="{{ item.get_absolute_url }}">
+{% if item.category %}
+<span class="category">{{ item.category.name }}:</span>
+{% endif %}
+{{ item.title }}</a></h3>
+{% if item.display_date %}
+<div class="vavs-justify vavs-btm-12">{{ item.display_date|date:"l jS F Y" }}</div>
+{% endif %}
+<div class="vavs-justify vavs-btm-12">{{ item.bodyhtml|safe|truncatewords_html:24 }}</div>
+<p>
+<a class="vavs-btn pull-left" href="{% url 'current_blog' %}">Articles, Events &amp; News</a>
+<a class="vavs-btn pull-right" href="{{ item.get_absolute_url }}">Read more</a>
+</p>
+</section>

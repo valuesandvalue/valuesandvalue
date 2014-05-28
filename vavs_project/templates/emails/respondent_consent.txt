@@ -1,0 +1,6 @@
+{# emails/respondent_consent.txt #}{% extends "emails/email_base.txt" %}{% block content %}Dear {{ respondent.name }},
+
+Thank you for your agreeing to participate in the Values and Value project.
+
+{% if respondent.pseudonym %}You have chosen to use the pseudonym: respondent.pseudonym.{% endif %}
+{% endblock content %}

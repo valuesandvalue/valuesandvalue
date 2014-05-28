@@ -1,0 +1,10 @@
+{# emails/survey_result.txt #}{% extends "emails/email_base.txt" %}{% block content %}{{ respondent.pref_name }}
+
+{% for answer in answers %}
+{{ answer.question }}
+{{ answer.text }}
+
+{% empty %}
+Did not submit any responses.
+{% endfor %}
+{% endblock content %}

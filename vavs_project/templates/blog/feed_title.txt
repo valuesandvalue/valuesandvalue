@@ -1,0 +1,2 @@
+{# blog/feed_title.txt #}
+{% if obj.category %}{{ obj.category }}: {% endif %}{{ obj.title }}

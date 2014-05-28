@@ -1,0 +1,40 @@
+{# flatpages/privacy_policy.html #}
+{% extends "page_base.html" %}
+{% load staticfiles %}
+
+{% block title %}Testers{% endblock %}
+
+{% block page_title %}Testers{% endblock page_title %}
+
+{% block content %}
+<div class="text-center">
+<p>If you are joining the project as a tester there are a few additional steps involved. Each step is quite simple and the whole process should not take more than a few minutes. Thank you for your help in contributing to the project.</p>
+
+<ol>
+<li><p>You will receive an invite to join the project on your Facebook account, please check for a notification, sent either from Beverley Skeggs or Simon Yuill, similar to this:</p>
+<img src="{% static 'img/testers_notification.png' %}">
+<p>You may have to look back into older messages.</p>
+</li>
+
+<li><p>Click on this to view the invite, click <strong>Confirm</strong> to accept:</p>
+<img src="{% static 'img/testers_invite.png' %}">
+<p>You must confirm the invite before you can register with the project.</p>
+</li>
+
+<li><p>Go to the Values &amp; Value <a href="{% url 'login' %}" target="_blank">login page</a> and click the blue <strong>Log in with Facebook</strong> button.</p>
+</li>
+
+<li><p>Login with your Facebook email and password, this will register your account with Values &amp; Value. As we are in test mode you see a warning similar to this:</p>
+<img src="{% static 'img/testers_register.png' %}">
+<p>This is normal during the test phase for a Facebook app, if you are concerned about the permissions being used please check our <a href="{% url 'privacy_policy' %}" target="_blank">Data Collection and Privacy Policy</a>.</p>
+</li>
+
+<li><p>Once you are registered, follow the instructions to install our <a href="{% url 'setup_apikey' %}">Admonitor Firefox Add-on</a>.</p>
+</li>
+
+</ol>
+
+<p>If you have any problems or questions please <a href="/contact/" target="_blank">contact us</a>.</p>
+
+</div>
+{% endblock %}

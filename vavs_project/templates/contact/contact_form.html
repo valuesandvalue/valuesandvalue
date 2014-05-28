@@ -1,0 +1,14 @@
+{# contact/contact_form.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact{% endblock %}
+
+{% block page_title %}
+<span class="title">Contact</span>
+{% endblock page_title %}
+
+{% block content %}
+<p>If you wish to contact the project please use the form below:</p>
+{% crispy form %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{# emails/survey_respondent.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="font-size: larger; margin-bottom: 46px;">Dear {{ respondent.name }},</p>
+
+<p style="text-align: justify;">This is a copy of your survey questions from the Values &amp; Value project.</p>
+
+{% for answer in answers %}
+<p style="text-align: justify;"><b>{{ answer.question }}</b></p>
+<p style="text-align: justify;">{{ answer.text }}</p>
+{% empty %}
+<p style="text-align: justify;">You did not submit any responses.</p>
+{% endfor %}
+
+{% endblock content %}

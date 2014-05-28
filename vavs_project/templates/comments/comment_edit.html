@@ -1,0 +1,41 @@
+{# feeds/feed_edit.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Facebook Comments{% endblock %}
+
+{% block page_title %}
+<span class="category">Facebook </span>
+<span class="title">Comments</span>
+{% endblock page_title %}
+
+{% block page_subtitle %}
+    <div class="text-center">
+        <p class="vavs-page-subtitle-info"><a class="vavs-btn" href="{% url 'current_comments'%}">View All Comments</a></p>
+    </div>
+    {% endblock page_subtitle %}
+
+{% block content %}
+<div class="vavs-section-block">
+<p>Please describe your experience of Facebook for how it has influenced your friendships and the different types of friends you would say you have on Facebook (for example: family, work colleagues, business partners, clients, followers, people you follow, etc.). How many of your Facebook friends are people you know directly? How many are people you have never met?</p>
+
+<p>Please give your email address if you would like to be contacted about news and updates to the project. You don’t have to provide a name or email address, but if you would like your comments attributed in any of our research please add your name.</p>
+
+<p>All public comments displayed on the site will be shown anonymously, without names or email addresses.<p>
+
+</div>
+{% crispy form %}
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+$("img.captcha").click(function(){
+    $.getJSON("{% url 'captcha-refresh' %}", {}, function(json) {
+        $("img.captcha").attr("src", json["image_url"]);
+        $("#id_captcha_0").attr("value", json["key"]);
+    });
+
+    return false;
+});
+</script>
+{% endblock extra_js %}

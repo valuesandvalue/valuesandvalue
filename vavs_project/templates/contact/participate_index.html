@@ -1,0 +1,41 @@
+{# comments/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+{% load crispy_forms_tags %}
+
+{% block title %}Participants{% endblock %}
+
+{% block page_title %}
+<span class="title">Participants</span>
+{% endblock page_title %}
+
+{% block content %}
+{% for object in object_list %}
+<article>
+    <header>
+    <h3>{{ object.name }}</h3>
+    </header>
+    {{ object.email }}
+    <footer>
+    {% if user.is_staff %}
+    <p>
+        <a class="vavs-btn pull-left" href="{% url 'delete_participant' object.pk %}">Delete</a>
+        <a class="vavs-btn pull-right" href="{% url 'update_participant' object.pk %}">Edit</a>
+    </p>
+    {% endif %}
+    </footer>
+</article>
+{% empty %}
+<div class="text-center">
+<p><i>There are currently no participants.</i></p>
+</div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="participant_index_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

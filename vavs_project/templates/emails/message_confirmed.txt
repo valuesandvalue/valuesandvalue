@@ -1,0 +1,16 @@
+{# emails/message_confirmed.txt #}{% extends "emails/email_base.txt" %}{% block content %}Dear {{ name }},
+
+Thank you for your message.
+
+If it requires a response someone will be in back touch with you soon.
+
+A copy of your message is below.
+
+Yours sincerely,
+Values & Value
+
+Your original message:
+
+{{ message }}
+
+{% endblock content %}

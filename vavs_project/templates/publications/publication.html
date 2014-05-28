@@ -1,0 +1,49 @@
+{# publications/publication.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{% if object.display or user.is_staff %}
+    {{ object.title }}
+{% else %}
+    Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+{% if object.display or user.is_staff %}
+{% if object.category %}
+    <span class="category">{{ object.category }}:</span>
+{% endif %}
+    <span class="title">{{ object.title }}</span>
+{% else %}
+Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_subtitle %}
+<h4 class="vavs-page-subtitle">{{ object.authors }}</h4>
+{% endblock page_subtitle %}
+
+{% block content %}
+{% if not object.display and user.is_staff %}
+    <p>This item is hidden from display.</p>
+{% endif %}
+
+{% if object.display or user.is_staff %}
+    <p>{{ object.published|date:"Y" }}</p>
+    <p>{{ object.description }}</p>
+    <div>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-btn" href="{{ object.pubfile.url }}">download</a></li>
+    {% if user.is_staff %}
+    <li><a class="vavs-btn" href="{% url 'update_publication' object.pk %}">Edit</a></li>
+    {% endif %}
+    </ul>
+    </div>
+{% else %}
+    <p>This item is not available for viewing.</p>
+{% endif %}
+
+
+
+{% endblock %}

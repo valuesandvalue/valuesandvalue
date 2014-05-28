@@ -1,0 +1,21 @@
+{# themes/theme_edit.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {% if object %}Edit {{ object.name }}{% else %}Create Theme{% endif %}
+{% endblock %}
+{% block page_title %}
+    {% if object %}Edit {{ object.name }}{% else %}Create Theme{% endif %}
+{% endblock page_title %}
+{% block content %}
+{% crispy form %}
+
+{% comment %}
+<form method="post" action="">
+{% csrf_token %}
+{{ form.as_p }}
+<p><input type="submit" value="Submit" /></p>
+</form>
+{% endcomment %}
+
+{% endblock %}

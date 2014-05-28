@@ -1,0 +1,85 @@
+{# accounts/login.html #}
+{% extends "page_base_narrow.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Login{% endblock %}
+
+{% block extra_css %}
+<link href="{{ STATIC_URL }}django_facebook/css/facebook.css" type="text/css" rel="stylesheet" media="all" />
+<script src="{{ STATIC_URL }}django_facebook/js/facebook.js" type="text/javascript"></script>
+{% endblock extra_css %}
+
+{% block page_title %}
+<span class="title">Login</span>
+{% endblock page_title %}
+
+{% block content %}
+<div id="fb-root"></div>
+<!--Some facebook code requires the fb-root div -->
+
+<script>
+    facebookAppId = '{{ FACEBOOK_APP_ID }}';
+    facebookDefaultScope = {{ FACEBOOK_DEFAULT_SCOPE_JS }};
+    staticUrl = '{{ STATIC_URL }}';
+    function facebookJSLoaded(){
+        FB.init({appId: facebookAppId, status: false, cookie: true, xfbml: true, oauth: true});
+    }
+    window.fbAsyncInit = facebookJSLoaded;
+    F = new facebookClass(facebookAppId);
+    F.load();
+</script>
+
+<div id="login-info">
+<p>Please use your Facebook account to login to the site as a project participant.</p>
+<p>The first time you login you will be asked to give permission for the project 
+to access your Facebook data and confirm your consent to participate in the project.</p>
+<p>Full details for the Facebook permissions and data that the project requires 
+are given on the <a href="{% url 'privacy_policy' %}" target="_blank">Data Collection and Privacy Policy</a> page.</p> 
+</div>
+
+<div id="fb-login" class="push-down-48">
+    <form action="{% url 'facebook_connect' %}?facebook_login=1" method="post">
+        <input type="hidden" value="1" name="connect" />
+        <input type="hidden" value="{% url 'profile' %}" name="next" />
+        <input type="hidden" value="{% url 'profile' %}" name="register_next" />
+        <input type="hidden" value="{{ request.path }}" name="error_next" />
+        {% csrf_token %}
+        <input onclick="F.connect(this.parentNode); return false;" type="image" src="{{ STATIC_URL }}django_facebook/images/facebook_login.png" />
+    </form>
+    
+    <div id="show-staff-login" class="click-text push-down-48">Staff login</div>
+</div>
+
+<div id="staff-login" class="form-block push-down-48">
+{% crispy form %}
+    <div id="show-fb-login" class="click-text">Facebook login</div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#staff-login').hide();
+    
+    function showStaffLogin()   {
+        $('#fb-login').hide();
+        $('#staff-login').show();
+    }
+    
+    function showFBLogin()   {
+        $('#fb-login').show();
+        $('#staff-login').hide();
+    }
+    
+    $('body').on('click', '#show-staff-login', function(event) {
+        event.stopPropagation();
+        showStaffLogin();
+        return false;
+    });
+    
+    $('body').on('click', '#show-fb-login', function(event) {
+        event.stopPropagation();
+        showFBLogin();
+        return false;
+    });
+});
+</script>
+{% endblock %}

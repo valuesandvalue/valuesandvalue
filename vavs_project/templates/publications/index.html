@@ -1,0 +1,60 @@
+{# publications/index.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Publications{% endblock %}
+
+{% block page_title %}Publications{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'add_publication' %}">Add publication</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="publications_index_paginated" %}
+{% endif %}
+</div>
+
+{% for object in object_list %}
+<article class="publication">
+    <header>
+        <h1>
+        {% if object.category %}
+            <span class="category">{{ object.category }}:</span>
+        {% endif %}
+            <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+        </h1>
+        <p>{{ object.authors }}</p>
+        <p>{{ object.published|date:"Y" }}</p>
+    </header>
+    <footer>
+        <div>
+        <ul class="vavs-controls pull-right">
+        <li><a class="vavs-btn" href="{{ object.get_absolute_url }}">Read more</a></li>
+        <li><a class="vavs-btn" href="{{ object.pubfile.url }}">Download</a></li>
+        {% if user.is_staff %}
+        <li><a class="vavs-btn" href="{% url 'update_publication' object.pk %}">Edit</a></li>
+        {% endif %}
+        </ul>
+        </div>
+    </footer>
+</article>
+{% empty %}
+<div class="text-center"><p>There are currently no items here.</p></div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="publications_index_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

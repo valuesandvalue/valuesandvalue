@@ -1,0 +1,12 @@
+{# emails/survey_respondent.txt #}{% extends "emails/email_base.txt" %}{% block content %}Dear {{ respondent.name }},
+
+This is a copy of your survey questions from the Values &amp; Value project.
+
+{% for answer in answers %}
+{{ answer.question }}
+{{ answer.text }}
+
+{% empty %}
+You did not submit any responses.
+{% endfor %}
+{% endblock content %}

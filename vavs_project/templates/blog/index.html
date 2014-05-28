@@ -1,0 +1,75 @@
+{# blog/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}
+{% if category %}
+{{ category.name }}
+{% else %}
+Blog
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+{% if category %}
+{{ category.name }}
+{% else %}
+Blog
+{% endif %}
+{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'create_blog_item' %}">Create new post</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% if category %}
+{% bootstrap_paginate page_obj range=5 url_view_name="blog_category_paginated" url_extra_kwargs=page_kwargs %}
+{% else %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_blog_paginated" %}
+{% endif %}
+{% endif %}
+</div>
+
+{% for blogitem in latest %}
+<article class="blogitem">
+    <header>
+        <h1>
+        {% if not category and blogitem.category %}
+        <span class="category">{{ blogitem.category.name }}:</span>
+        {% endif %}
+        <a href="{{ blogitem.get_absolute_url }}">{{ blogitem.title }}</a></h1>
+        {% if blogitem.display_date %}
+        <p>{{ blogitem.display_date|date:"l jS F Y" }}</p>
+        {% else %}
+        <p>{{ blogitem.created|date:"l jS F Y" }}</p>
+        {% endif %}
+    </header>
+    {{ blogitem.bodyhtml|safe|truncatewords_html:64 }} 
+    <footer>
+        <a class="vavs-btn pull-right" href="{{ blogitem.get_absolute_url }}">Read more</a>
+    </footer>
+</article>
+{% empty %}
+<div class="text-center"><p>There are currently no items here.</p></div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% if category %}
+{% bootstrap_paginate page_obj range=5 url_view_name="blog_category_paginated" url_extra_kwargs=page_kwargs %}
+{% else %}
+{% bootstrap_paginate page_obj range=5 url_view_name="current_blog_paginated" %}
+{% endif %}
+{% endif %}
+</div>
+
+{% endblock %}
+

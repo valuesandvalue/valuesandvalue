@@ -1,0 +1,49 @@
+{# feeds/current.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Image Gallery{% endblock %}
+
+{% block page_title %}Image Gallery{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'add_gallery_image' %}">Add new image</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="gallery_index_paginated" %}
+{% endif %}
+</div>
+
+{% for object in object_list %}
+<article>
+    <a href="{{ object.get_absolute_url }}"><img src="{{ object.image.url }}" width="{{ object.width }}" height="{{ object.height }}"></a>
+    {% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
+    <p>Markdown: <span>![{% if object.caption %}{{ object.caption }}{% endif %}]({{ object.image.url }} {% if object.caption %}"{{ object.caption }}"{% endif %})</span></p>
+    <div>
+    <ul class="vavs-controls pull-right">
+    {% if user.is_staff %}
+    <li><a class="vavs-btn" href="{% url 'update_gallery_image' object.pk %}">Edit</a></li>
+    {% endif %}
+    </ul>
+    </div>
+</article>
+{% empty %}
+<div class="text-center"><p>There are currently no items here.</p></div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="gallery_index_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

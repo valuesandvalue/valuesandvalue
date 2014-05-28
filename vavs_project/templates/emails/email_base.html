@@ -1,0 +1,40 @@
+{# emails/email_base.html #}<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>
+        {% if title %}
+            {{ title }}
+        {% else %}
+            Values &amp; Value
+        {% endif %}
+        </title>
+    </head>
+    <body>
+    <center>
+    <table cellspacing="0" cellpadding="0" border="0" style="width: 100%; max-width: 640px; margin: 24px;">
+    <tbody>
+
+    <tr>
+    <td valign="top" style="padding-left: 0px; padding-top: 0px; padding-bottom: 0px; padding-right: 0px;">
+    {% block content %}{% endblock content %}
+    </td>
+    </tr>
+    
+    <tr>
+    <td valign="top" align="center" style="padding-left: 0px; padding-top: 24px; padding-bottom: 0px; padding-right: 0px;">
+    <img src="http://{{site}}/static/img/logo_email.gif" nosend="1" border="0" width="160" height="93" alt="Values & Value"  style="padding-left: 0px; padding-top: 0px; padding-bottom: 24px; padding-right: 0px;">
+    <br>
+    <a href="http://www.valuesandvalue.info" style="font-weight: bold; color: #000; text-decoration: none;">http://www.valuesandvalue.info</a>
+    </td>
+    </tr>
+    
+    <tr>
+    <td valign="top" align="center" style="padding-left: 0px; padding-top: 24px; padding-bottom: 46px; padding-right: 0px;">
+    <p style="font-size: smaller; text-align: justify;">Values &amp; Value is funded by an <a href="http://www.esrc.ac.uk/" style="color: #000;">ESRC</a> Professorial Fellowship (ES/K010786/1) and hosted by the Department of Sociology, <a href="http://www.gold.ac.uk/" style="color: #000;">Goldsmiths</a>, University of London.</p>
+    </td>
+    </tr>
+    
+    </table>
+    </center>
+    </body>
+</html>

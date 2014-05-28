@@ -1,0 +1,18 @@
+{# publications/publication_edit.html #}
+{% extends "page_base.html" %}
+{% block title %}
+    {% if object %}Edit {{ object.title }}{% else %}Create Publication{% endif %}
+{% endblock %}
+{% block page_title %}
+    {% if object %}
+        <span class="category">Edit: </span>
+        <span class="title">{{ object.title }}</span>
+    {% else %}Add Publication{% endif %}
+{% endblock page_title %}
+{% block content %}
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<p><input type="submit" value="Submit" /></p>
+</form> 
+{% endblock %}

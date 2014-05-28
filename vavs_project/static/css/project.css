@@ -1,0 +1,810 @@
+/*! project specific CSS goes here. */
+
+@font-face {
+    font-family: 'mutlu_ornamental';
+    src: url('../fonts/Mutlu__Ornamental-webfont.eot');
+    src: url('../fonts/Mutlu__Ornamental-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Mutlu__Ornamental-webfont.woff') format('woff'),
+         url('../fonts/Mutlu__Ornamental-webfont.ttf') format('truetype'),
+         url('../fonts/Mutlu__Ornamental-webfont.svg#mutlu_ornamental') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'copperplate_becker_boldRg';
+    src: url('../fonts/copperplate_becker_bold-webfont.eot');
+    src: url('../fonts/copperplate_becker_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/copperplate_becker_bold-webfont.woff') format('woff'),
+         url('../fonts/copperplate_becker_bold-webfont.ttf') format('truetype'),
+         url('../fonts/copperplate_becker_bold-webfont.svg#copperplate_becker_boldRg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -96px;
+  /* Pad bottom by footer height */
+  padding: 50px 0 96px;
+}
+
+.jumbotron {
+    background-color: inherit;
+    text-align: center;
+    padding-top: 24px;
+    margin-bottom: 30px;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-bottom-color: #fff;
+    border-top-color: #fff;
+}
+
+#vavs-logo  {
+    max-width:640px;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:48px;
+}
+
+.vavs-strapline {
+/*    font-family: 'mutlu_ornamental';*/
+    font-size: 0.8em;
+    font-family: 'copperplate_becker_boldRg';
+    max-width: 620px;
+    margin-top:72px;
+}
+
+figure img {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+section {
+    margin-bottom: 48px;
+}
+
+.vavs-front-col {
+    display:block;
+    max-width:33.3%;
+    min-width:280px;
+    overflow:auto;
+    float:left;
+}
+
+.vavs-md-box {
+    min-height: 1px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+    position: relative;
+}
+
+.vavs-md-box img {
+    width:100%;
+}
+
+.vavs-hold-img img {
+    max-width:100%;
+    max-height:60px;
+}
+
+.vavs-hide-img img {
+    display:none;
+}
+
+.vavs-justify {
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+.vavs-btm-12 {
+    margin-bottom: 12px;
+}
+
+.vavs-main-column {
+    max-width:720px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.vavs-main-column p{
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+.vavs-main-column img {
+    display: block;
+    margin: 36px auto 36px;
+}
+
+.vavs-narrow-column {
+    max-width:640px;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+.vavs-narrow-column > p {
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+.form-block {
+    display: block;
+    width: 60%;
+    max-width: 640px;
+    clear:both;
+    overflow: auto;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.inline-element ~ .help-inline {
+    margin-left:1em;
+    color: #333333;
+}
+
+.help-block {
+    color: #333333;
+    margin-bottom: 24px;
+}
+
+.form-block * {
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+.vavs-flow  {
+    float:left;
+    display:inline-block;
+}
+
+.vavs-flow  .title {
+    float:left;
+    display:inline-block;
+    background:#333333;
+    color:#fff;
+}
+
+.vavs-flow  .body {
+    float:left;
+    display:inline;
+}
+
+.vavs-flow  p {
+    float:left;
+    display:inline;
+}
+
+ul.vavs-controls {
+    float:left;
+    display:inline;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+ul.vavs-controls li {
+    float:left;
+    display:inline;
+    margin-left:0.8em;
+}
+
+div.vavs-control-box    {
+    width:100%;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    display:block;
+    overflow:auto;
+    height:24px;
+    margin-bottom:42px;
+    text-align: center;
+}
+.vavs-control-label {
+    text-transform: uppercase;
+    font-size:0.8em;
+    line-height: 1.0em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    float:left;
+    display:block;
+    margin-top:4px;
+}
+
+a.vavs-control-btn   {
+    text-transform: uppercase;
+    font-size:0.8em;
+    line-height: 1.0em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    text-decoration: none;
+    margin:0px;
+}
+
+a.vavs-control-btn:hover   {
+    text-decoration: none;
+}
+
+.vavs-img {
+    width: 100%;
+    text-align: center;
+    clear:both;
+}
+
+.vavs-img img {
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.vavs-img .img-caption {
+    font-size:0.8em;
+    font-style:italic;
+    clear:both;
+}
+
+strong a   {
+    color: #333333;
+}
+
+.vavs-btn-label   {
+    text-transform: uppercase;
+    font-size:0.8em;
+    line-height: 1.0em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+
+a.vavs-btn   {
+    text-transform: uppercase;
+    font-size:0.8em;
+    line-height: 1.0em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    text-decoration: none;
+    border-bottom: 1px dotted #fff;
+}
+
+a.vavs-btn:hover   {
+    color: #333333;
+    text-decoration: none;
+    border-bottom: 1px dotted #000;
+}
+
+.btn-sm {
+    border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.vavs-flow-header   {
+    display:block;
+    width:100%;
+    font-family: 'copperplate_becker_boldRg';
+    font-size: 4em;
+    color: #000;
+}
+
+.vavs-item-header   {
+    display:block;
+    width:100%;
+}
+
+.vavs-item-header a {
+    color:#333333;
+    text-decoration: none;
+    border-bottom: 2px dotted #fff;
+}
+
+.vavs-item-header a:hover {
+    color:#333333;
+    text-decoration: none;
+    border-bottom: 2px dotted #000;
+}
+
+.vavs-table  {
+    margin-top:24px;
+    margin-bottom:24px;
+}
+
+.vavs-table td  {
+    text-align:left;
+    vertical-align: top;
+    padding-bottom: 12px;
+}
+
+.vavs-table .col-80  {
+    min-width: 80px;
+}
+
+.vavs-table .col-120  {
+    min-width: 120px;
+}
+
+.vavs-table .table-headings {
+    font-weight: bold;
+}
+
+.vavs-table .padright-10  {
+    padding-right: 10px;
+}
+
+h1, h2, h3, h4, h5, h6, h7   {
+    font-family: 'copperplate_becker_boldRg';
+/*    color: #000;*/
+}
+
+h1.vavs-page-title   {
+    font-family: 'mutlu_ornamental';
+    font-size: 8em;
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:72px;
+    margin-bottom:72px;
+    color: #000;
+}
+
+.vavs-page-subtitle   {
+    font-family: 'copperplate_becker_boldRg';
+/*    font-size: 2em;*/
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:72px;
+    color: #000;
+}
+
+.bottom-12px   {
+    margin-bottom:12px;
+}
+
+.bottom-24px   {
+    margin-bottom:24px;
+}
+
+.bottom-48px   {
+    margin-bottom:48px;
+}
+
+.clear-break .clear-break:after {
+  clear: both;
+}
+
+.vavs-page-subtitle-info   {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:48px;
+    color: #000;
+}
+
+article {
+    margin-bottom: 48px;
+}
+
+article header h1 a  {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 2px solid #fff;
+}
+
+article header h1 a:hover  {
+    color: #000;
+    text-decoration: none;
+    border-bottom: 2px dotted #000;
+}
+
+article.feeds ul  {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+article.feeds a {
+    color: #333333;
+}
+
+article.feeds .description {
+    font-style: italic;
+}
+
+
+h1 span.category  {
+    font-family: 'copperplate_becker_boldRg';
+    font-size: 0.4em;
+    clear:both;
+}
+
+h2.vavs-item-header   {
+    font-family: 'mutlu_ornamental';
+    margin-left:12px;
+    font-size: 1.4em;
+}
+
+h3.vavs-item-header   {
+    font-family: 'copperplate_becker_boldRg';
+    font-size: 1.4em;
+}
+
+.ital {
+    font-style: italic;
+}
+
+.push-down-24 {
+    margin-top:24px;
+}
+
+.push-down-48 {
+    margin-top:48px;
+}
+
+.fill-width {
+    width: 100%;
+}
+
+.fill-width-centre {
+    width: 100%;
+    text-align: center;
+}
+
+.fill-width-centre p {
+    width: 100%;
+    text-align: center;
+}
+
+.fancy-text {
+    font-family: 'mutlu_ornamental';
+    font-size: 2.2em;
+    margin-top:1em;
+    margin-left:1em;
+    margin-bottom: -12px;
+}
+
+.fancy-text a {
+    color:#333333;
+    text-decoration: none;
+}
+
+.fancy-text a:hover {
+    color:#333333;
+    text-decoration: none;
+}
+
+.large-text {
+    font-size: 2em;
+}
+
+.vavs-pager {
+    display:block;
+    text-align:center;
+}
+
+.vavs-pager ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.vavs-pager ul li {
+    display:inline;
+    float:left;
+    margin:12px;
+}
+
+.vavs-pager ul li a {
+    text-decoration: none;
+}
+
+.vavs-pager ul li a:hover {
+    color: #000;
+}
+
+
+.vavs-big-quote {
+    font-size: 2em;
+    font-weight: bold;
+    border: 0px;
+}
+
+.vavs-section-block {
+    margin-bottom:48px;
+}
+
+#page-title {
+    /*position: absolute;*/
+    width:100%;
+    overflow: auto;
+}
+
+/* FOOTER */
+#footer {
+    height: 96px;
+    background-color: #f5f5f5;
+    margin-top:48px;
+    text-align: center;
+    overflow: auto;
+    position: absolute;
+    width:100%;
+}
+
+#footer p   {
+    margin: 6px 0 0;
+}
+
+#footer > .container {
+    padding: 6px 12px;
+    max-width: 640px;
+}
+
+/* FORMS */
+.vavs-form {
+    margin-bottom:48px;
+}
+
+.vavs-form label {
+    margin-right: 1em;
+    font-weight: normal;
+    min-width:120px;
+}
+
+.wide-area {
+    width:100%;
+    clear:both;
+    overflow:auto;
+}
+
+.wide-thin-area {
+    width:100%;
+    height:96px;
+    clear:both;
+    margin-bottom: 12px;
+}
+
+.wide-thinner-area {
+    width:100%;
+    height:48px;
+    clear:both;
+    margin-bottom: 12px;
+}
+
+.inline-elements {
+    display:block;
+    clear:both;
+    margin-top:6px;
+    margin-bottom:6px;
+}
+
+.inline-elements * {
+    display:inline-block;
+/*    float:left;*/
+}
+
+
+.vavs-consent ol {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 36px;
+    margin-bottom:1em;
+    text-align:left;
+}
+
+.vavs-consent ol li {
+    margin-bottom:1em;
+    text-align:left;
+}
+
+.captcha-controls {
+    position: relative;
+    display:block;
+    margin:24px 0px 24px 0px;
+}
+
+.captcha-controls img.captcha {
+    margin:6px 12px 12px 0px;
+    border: 1px solid #666;
+    display:inline-block;
+    float:left;
+}
+
+.captcha-controls .captcha-input  {
+    display: inline-block;
+    float: left;
+    font-size: 1.4em;
+    height: 40px;
+    margin:6px 12px 0px 0px;
+}
+
+.captcha-controls .captcha-help {
+    clear:both;
+}
+
+.captcha-controls #error_1_id_captcha {
+    display: inline-block;
+    float: left;
+    margin: 18px 24px 0px 0px; ; 
+    float: left;
+}
+
+.click-text {
+    display: inline-block;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    color: #999;
+}
+
+#login-info {
+    text-align: justify;
+    text-justify: newspaper;
+}
+
+/* MEDIA */
+@media (max-width: 360px) {
+    #vavs-logo  {
+        margin-top:12px;
+    }
+    h1.vavs-page-title   {
+        font-size: 4em;
+        margin-top:36px;
+        margin-bottom:36px;
+    }
+    #wrap {
+        margin: 0 auto -96px;
+        padding: 50px 0 96px;
+    }
+    #footer {
+        height: 96px;
+    }
+    #footer > .container {
+        padding: 6px 12px;
+    }
+    #footer p   {
+        font-size: 0.8em;
+    }
+    .vavs-front-col {
+        max-width:100%;
+        min-width:280px;
+    }
+    .captcha-controls .captcha-input  {
+        margin: 6px 0px 12px 0px;
+    }
+    .captcha-controls #error_1_id_captcha {
+        margin: 0px 0px 12px 0px; 
+    }
+}
+
+@media (min-width: 362px) and (max-width: 479px) {
+    #vavs-logo  {
+        margin-top:24px;
+    }
+    h1.vavs-page-title   {
+        font-size: 6em;
+        margin-top:48px;
+        margin-bottom:48px;
+    }
+    #wrap {
+        margin: 0 auto -96px;
+        padding: 50px 0 96px;
+    }
+    #footer {
+        height: 96px;
+    }
+    #footer p   {
+        font-size: 0.8em;
+    }
+    #footer > .container {
+        padding: 6px 12px;
+    }
+    .vavs-front-col {
+        max-width:100%;
+        min-width:300px;
+    }
+    .captcha-controls .captcha-input  {
+        clear:both;
+    }
+   .captcha-controls .captcha-input  {
+        margin: 6px 0px 12px 0px;
+    }
+    .captcha-controls #error_1_id_captcha {
+        margin: 0px 0px 12px 0px; 
+    }
+}
+
+@media (min-width: 480px) and (max-width: 640px) {
+    #vavs-logo  {
+        margin-top:36px;
+    }
+    h1.vavs-page-title   {
+        font-size: 6em;
+        margin-top:60px;
+        margin-bottom:60px;
+    }
+    #wrap {
+        margin: 0 auto -108px;
+        padding: 50px 0 108px;
+    }
+    #footer {
+        height: 108px;
+    }
+    #footer p   {
+        font-size: 1em;
+    }
+    #footer > .container {
+        padding: 6px 24px;
+    }
+    .vavs-front-col {
+        max-width:100%;
+        min-width:300px;
+    }
+    .captcha-controls .captcha-input  {
+        margin:6px 12px 0px 0px;
+    }
+    .captcha-controls #error_1_id_captcha {
+        margin: 18px 24px 0px 0px; 
+    }
+}
+
+@media (min-width: 641px) {
+    #vavs-logo  {
+        margin-top:48px;
+    }
+    h1.vavs-page-title   {
+        font-size: 8em;
+        margin-top:72px;
+        margin-bottom:72px;
+    }
+    #wrap {
+        margin: 0 auto -90px;
+        padding: 50px 0 90px;
+    }
+    #footer {
+        height: 90px;
+    }
+    #footer p   {
+        font-size: 1em;
+    }
+    #footer > .container {
+        padding: 6px 12px;
+    }
+    .vavs-front-col {
+        max-width:33.3%;
+        min-width:300px;
+    }
+    .captcha-controls .captcha-input  {
+        margin:6px 12px 0px 0px;
+    }
+    .captcha-controls #error_1_id_captcha {
+        margin: 18px 24px 0px 0px; 
+    }
+}
+
+@media print {
+    #footer {
+        display: none !important;
+    }
+}
+

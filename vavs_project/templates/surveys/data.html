@@ -1,0 +1,40 @@
+{# surveys/data.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}{{ survey.name }}{% endblock %}
+
+{% block page_title %}{{ survey.name }}{% endblock page_title %}
+
+{% block page_subtitle %}
+<h4 class="vavs-page-subtitle bottom-12px">Data</h4>
+<p class="vavs-page-subtitle-info">
+Download survey data: <a href="{% url 'survey_excell' survey.id %}">spreadsheet</a> - <a href="{% url 'survey_rtf' survey.id %}">document</a>
+</p>
+{% endblock %}
+
+{% block content %}
+<h4>Extracts</h4>
+<div class="bottom-48px">
+Download extract data, questions 1-6 and 21: <a href="{% url 'survey_extract_excell' survey.id %}">spreadsheet</a> - <a href="{% url 'survey_extract_rtf' survey.id %}">document</a>
+</div>
+
+<h4>Questions</h4>
+<div class="bottom-48px">
+{% for question in questions %}
+<p>{{ question }}</p>
+{% empty %}
+<p>There have been no questions for this survey.</p>
+{% endfor %}
+</div>
+
+<h4>Respondents</h4>
+<div class="bottom-48px">
+{% for respondent in respondents %}
+<div class="clear-break">{{ respondent.name }} ({% if respondent.pseudonym %}{{ respondent.pseudonym }}{% else %}no pseudonym{% endif %}) {{ respondent.created }} <span class="pull-right"><a href="{% url 'respondent' survey.id respondent.id %}">responses</a> - <a href="{% url 'respondent_excell' survey.id respondent.id %}">speadsheet</a> - <a href="{% url 'respondent_rtf' survey.id respondent.id %}">document</a></span></div>
+{% empty %}
+<p>There have been no reponses to this survey.</p>
+{% endfor %}
+</div>
+
+{% endblock %}

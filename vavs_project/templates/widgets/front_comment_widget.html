@@ -1,0 +1,19 @@
+{# widgets/front_comment_widget.html #}
+{% load blog_tags %}
+<section class="vavs-md-box vavs-hide-img">
+<div class="vavs-justify vavs-btm-12">
+{% if item.question_1 %}
+<p>{{ item.question_1|fancywords:item.get_absolute_url|truncatewords_html:64 }}</p>
+{% endif %}
+{% if item.question_2 %}
+<p>{{ item.question_2|fancywords:item.get_absolute_url|truncatewords_html:64 }}</p>
+{% endif %}
+{% if item.question_3 %}
+<p>{{ item.question_3|fancywords:item.get_absolute_url|truncatewords_html:64 }}</p>
+{% endif %}
+</div>
+<p>
+<a class="vavs-btn pull-left" href="{% url 'current_comments' %}">Facebook Comments</a>
+<a class="vavs-btn pull-right" href="{{ item.get_absolute_url }}">Read more</a>
+</p>
+</section>

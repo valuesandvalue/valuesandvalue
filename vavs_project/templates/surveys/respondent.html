@@ -1,0 +1,38 @@
+{# surveys/respondent.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}{{ respondent.pref_name }}{% endblock %}
+
+{% block page_title %}{{ respondent.pref_name }}{% endblock page_title %}
+
+{% block page_subtitle %}
+<h4 class="vavs-page-subtitle bottom-12px">{{ survey.name }}</h4>
+{% if request.user.is_staff %}
+<p class="vavs-page-subtitle-info"><a href="{% url 'survey_data' survey.id %}">view survey</a></p>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<article>
+    <header>
+        <p>Name: {{ respondent.name }}<br>
+        Pseudonym: {% if respondent.pseudonym %}{{ respondent.pseudonym }}{% else %}no pseudonym{% endif %}<br>
+        Date: {{ respondent.created }}<br>
+        Email: {% if respondent.email %}{{ respondent.email }}{% else %}no email{% endif %}<br>
+        Further contact: {% if respondent.further_contact %}yes{% else %}no{% endif %}</p>
+{% if request.user.is_staff %}
+        <p><a href="{% url 'delete_respondent_survey' survey.id respondent.id %}">delete</a></p>
+{% endif %}
+    </header>
+    <div class="survey-responses">
+    {% for answer in answers %}
+    <p style="text-align: justify;"><b>{{ answer.question }}</b></p>
+    <p style="text-align: justify;">{{ answer.text }}</p>
+    {% empty %}
+    <p style="text-align: justify;">Did not submit any responses.</p>
+    {% endfor %}
+    </div>
+</article>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{# front.html #}
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load blog_tags %}
+
+{% block pagecontainer %}
+     <div class="jumbotron">
+        <div id="vavs-logo">
+            <figure class="responsive" data-media="{% static 'img/logo_small.png' %}" data-media440="{% static 'img/logo_medium.png' %}" data-media600="{% static 'img/logo_large.png' %}" title="Value & Values">
+                <noscript>
+                    <img src="{% static 'img/logo_large.png' %}" alt="Value & Values">
+                </noscript>
+            </figure>
+            <p class="vavs-strapline">Studying the relationship of values to value in modern digital relations and traditional prosperity theology.</p>
+        </div>
+    </div>
+    
+    <div class="container">
+        {% front_flow blogs comments publications feeds 8 %}
+    </div>
+   
+{% endblock pagecontainer %}
+
+{% block extra_js %}
+
+{% endblock extra_js %}
+

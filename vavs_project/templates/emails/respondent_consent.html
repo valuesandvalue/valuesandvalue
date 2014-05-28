@@ -1,0 +1,11 @@
+{# emails/respondent_consent.html #}{% extends "emails/email_base.html" %}
+{% block content %}
+<p style="font-size: larger; margin-bottom: 46px;">Dear {{ respondent.name }},</p>
+
+<p style="text-align: justify;">Thank you for your agreeing to participate in the Values &amp; Value project.</p>
+
+{% if respondent.pseudonym %}
+<p>You have chosen to use the pseudonym: respondent.pseudonym.</p>
+{% endif %}
+
+{% endblock content %}

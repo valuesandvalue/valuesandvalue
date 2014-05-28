@@ -1,0 +1,7 @@
+{# emails/new_respondent.txt #}{% extends "emails/email_base.txt" %}{% block content %}
+Name: {{ respondent.name }}
+Date: {{ respondent.created }}
+Email: {% if respondent.email %}{{ respondent.email }}{% else %}no email{% endif %}
+Pseudonym: {% if respondent.pseudonym %}{{ respondent.pseudonym }}{% else %}no pseudonym{% endif %}
+Further contact: {% if respondent.further_contact %}yes{% else %}no{% endif %}
+{% endblock content %}

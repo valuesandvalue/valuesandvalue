@@ -1,0 +1,18 @@
+{# gallery/image_edit.html #}
+{% extends "page_base.html" %}
+{% block title %}
+    {% if object %}Edit{% else %}Create{% endif %} Image
+{% endblock %}
+{% block page_title %}
+    {% if object %}
+        <span class="category">Edit: </span>
+        <span class="title">{% if object.caption %}{{ object.caption|truncatewords:4 }}{% else %}Image{% endif %}</span>
+    {% else %}Add Image{% endif %}
+{% endblock page_title %}
+{% block content %}
+<form method="post" action="" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<p><input type="submit" value="Submit" /></p>
+</form> 
+{% endblock %}

@@ -1,0 +1,157 @@
+{# addata/user_setup.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+{% load staticfiles %}
+
+{% block title %}
+Admonitor
+{% endblock %}
+
+{% block page_title %}
+Admonitor
+{% endblock page_title %}
+
+{% block page_subtitle %}
+{% if user.is_staff %}
+<h4 class="vavs-page-subtitle">project staff</h4>
+{% endif %}
+{% endblock page_subtitle %}
+
+{% block content %}
+<p>Admonitor is an Add-on for Firefox browsers that has been specially written for the Values &amp; Value project. It works alongisde the <a href="{% url 'interactions_study' %}">Values &amp; Value Facebook App</a> and gathers data that we are not able to collect directly from Facebook, this includes advertising shown on Facebook, the order of posts as they appear at the top of users' Facebook timelines, and advertising included on other sites via systems such as GoogleAds. We are gathering this data in order to relate patterns of user interaction with Facebook to possible patterns that might appear in the advertising users see as the browse the web, so that we can learn more about how Facebook seeks to stimulate user interaction in order to increase the economic value that can be generated from this.</p>
+
+<p>The Admonitor Add-on is easy to install and requires no input or actions from the user after it has been registered. Instructions for <strong><a href="#installing">installing</a></strong> and <strong><a href="#setup">registering</a></strong> the software are given below along with more information on <strong><a href="#collection">Data Collection and Privacy</a></strong>, as well as how to <strong><a href="#uninstalling">disable or remove</a></strong> the software and <strong><a href="#troubleshooting">handling problems</a></strong> you might encounter when installing or using it.</p>
+
+<a name="installing"></a>
+<h2>Installing the Software</h2>
+
+<p>Please note the software is only compatible with Mozilla Firefox browsers.</p>
+
+<p>Click on the button below to install the Values &amp; Value software onto your browser:</p>
+
+<div class="text-center push-down-48">
+    <a class="btn btn-primary button white btn-lg" href="{% static 'software/admonitor.xpi' %}">Install software</a>
+</div>
+
+<p class="push-down-48">Once you have installed the software click on the Values &amp; Value icon, or go to the <strong>Tools</strong> menu in your browser and select <strong>Values and Value</strong> to open the login screen, then follow the <strong><a href="#setup">Software Setup</a></strong> instructions below.</p>
+
+<img src="{% static 'img/tools_menu.png' %}">
+
+<p>On the most recent versions of Firefox (version 29.0 or above) the Values &amp; Value icon will appear in the main toolbar on the top-right of the browser window:</p>
+
+<img src="{% static 'img/toolbar.png' %}">
+
+<p>On the older versions of Firefox (version 28.0 or below) the Values &amp; Value icon will appear in the Add-ons toolbar on the bottom-right of the browser window:</p>
+
+<img src="{% static 'img/toolbar_old.png' %}">
+
+<P>Please note the software is only compatible with Firefox versions 21.0 and above and will work best in the most recent versions (26.0 and above).</p>
+
+<p>If you have difficulty installing or using the software please see the <strong><a href="#troubleshooting">Troubleshooting</a></strong> section below. To disable or remove the software see <strong><a href="#uninstalling">Uninstalling</a></strong>.</p>
+
+<p>A detailed outline of the data that is collected by the software and how we address privacy issues is given in the <strong><a href="#collection">Data Collection and Privacy</a></strong> section.</p>
+
+<a name="setup"></a>
+<h2 class="push-down-48">Software Setup</h2>
+
+<p>To setup your Firefox admonitor add-on, please enter your username as shown below and copy and paste the software key into the form on your login window.</p>
+
+<img src="{% static 'img/registering.png' %}">
+
+<p>After you have successfully registered the software you can close the login window. You will not need to login again unless you disable or remove and re-install the software.</p>
+
+<a name="register"></a>
+<div id="admonitor-username" class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Username</h3>
+    </div>
+    <div class="panel-body">
+    <span class="large-text">
+    {{ user.username }}
+    </span>
+    </div>
+</div>
+<div id="admonitor-apikey" class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Software key</h3>
+    </div>
+    <div class="panel-body">
+        <span class="large-text">{{ api_key }}</span>
+    </div>
+</div>
+
+<p>If you wish to create a new software key please click the <strong>reset button</strong> below.</p>
+
+<div class="text-center push-down-48">
+    <a class="btn btn-primary button white btn-lg" href="{% url 'reset_apikey' %}">Reset software key</a>
+</div>
+
+<a name="collection"></a>
+<h2 class="push-down-48">Data Collection and Privacy</h2>
+
+<p>The software collects advertising data from Facebook that appears as Sponsored Stories in your main activity stream, the adverts that appear in the Facebook sidebar and ambient advertising that is pushed to you as you browse the web. We are gathering these to determine if there are any patterns relating user activity on Facebook to advertising content and if common patterns in advertising can be identified amongst users who are friends.</p>
+
+<p>The software also collects the order of posts as they appear in your Facebook activity stream. We are gathering these to determine of there are patterns in how Facebook selects the posts that it displays to you and, as with adverts, if common patterns can be identified amongst users who are friends.</p>
+
+<p>The detailed content of this data is only available to users registered with the Values & Value website. Users only have access to their own data and are not able to see others.</p> 
+
+<p>The ambient web advertising data includes the URLS of the adverts and the domain name of the site that it was displayed on, but does not collect the specific URL of the page itself. For example, if the software detects an advert from GoogleAds on a page with a URL such as <em>http://www.example.com/pages/tolookat.html</em> it will only store the domain name for the page: <em>http://www.example.com</em>.
+
+<p>The researchers are able to see the data for all participants but only in an anonymized form. Users's real names are replaced with random fictitious names and no content from Facebook posts, such as messages, or photos, are shown to researchers. The researchers are therefore able to see the patterns of interaction between users but without knowing who is who or what the content of this is.</p>
+
+<p>The images and content from sponsored stories and advertising on Facebook is visible to researchers as this does not contain any personal information.</p>
+
+<p>When viewing the web advertising data the researchers are able to see the names of the advertising companies but not the actual websites visited by participants.</p>
+
+<p>It may be that during the study the researchers need to see some of the content from your Facebook activity, for example to discuss a specific posting or series of events that are relevant to the study. In this case the researchers will either meet with you in person, if doing an interview, or request that you turn off the anonymization for your data. This is controlled by a setting in your personal profile which only you have access to.</p>
+
+<p>If you wish to temporarily prevent the software from gathering data, you can do so either by opening a Private Window from the main menu in Firefox. The software will not collect any data from pages you view in a Private Window. Alternativle, you can open the Add-ons dialogue and disable the plug-in (see <a href="#uninstalling">below</a>). Please remember to re-enable to software when you have finished.</p>
+
+<a name="unregistering"></a>
+<h2 class="push-down-48">Unregistering</h2>
+
+<p>Click on the Values &amp; Value icon, or go to the <strong>Tools</strong> menu in your browser and select <strong>Values and Value</strong> to open the login screen (as described <a href="#setup">above</a>), and click on the <strong>unregister</strong> button.</p>
+
+<img src="{% static 'img/unregister.png' %}">
+
+<p>The software can now be removed or registered for a different user.</p>
+
+<a name="uninstalling"></a>
+<h2 class="push-down-48">Disabling and Uninstalling</h2>
+
+<p>The software can be disabled or removed by opening the Add-ons dialogue box and clicking on either the <strong>Disable</strong> or <strong>Remove</strong> button.</p>
+
+<img src="{% static 'img/disable.png' %}">
+
+<p>In the most recent versions of Firefox (version 29.0 or above) the Adds-on dialogue box is found in the main menu in the top-right of the browser window. In older versions of Firefox (version 28.0 and below) this is found in the <strong>Tools</strong> menu.</p>
+
+<a name="troubleshooting"></a>
+<h2 class="push-down-48">Troubleshooting</h2>
+
+<p><strong>The software won't install on my browser</strong></p>
+
+<p>The software will ony work with Firefox from versions 21.0 upwards and will not work with other browsers, such as Chrome, Safari or Internet Explorer. We recommend that you upgrade to the latest version of Firefox when using this software: <a href="https://www.mozilla.org/en-GB/firefox/new/" target="_blank">https://www.mozilla.org/en-GB/firefox/new/</a>.</p>
+
+<p><strong>The software started to install but then stopped or failed before completing</strong></p>
+
+<p>When you first click on the <strong><a href="#installing">Install software</a></strong> button, a dialogue box will appear saying "Firefox prevented this site (values.doc.gold.ac.uk) from asking you to install software on your computer" with a button given you the options  "Allow" and "Not now", click the <strong>Allow</strong> option:</p>
+
+<img src="{% static 'img/install_allow.png' %}">
+
+<p>You will then see a dialogue box saying "Install add-ons only from authors you trust" with the opetions to "Cancel" or "Install Now", click on <strong>Install Now</strong>:</p>
+
+<img src="{% static 'img/install_now.png' %}">
+
+<p>The software should then download and install onto your browser. You can now follow the <strong><a href="#setup">setup</a></strong> instructions above.</p>
+
+<p>If you continue to have problems please <a href="/contact/">contact us</a>.</p>
+
+<p><strong>I get error messages appearing from the software</strong></p>
+
+<p>Please <a href="/contact/">contact us</a> and include a note of the error message, and the username you are registered with.</p>
+
+<p><strong>I wish to withdraw from the project and have my data removed</strong></p>
+
+<p>Please <a href="/contact/">contact us</a> and let us know the username you are registered with.</p>
+
+{% endblock %}

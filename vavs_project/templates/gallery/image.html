@@ -1,0 +1,35 @@
+{# gallery/image.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+Image: 
+{% if object.caption %}
+    {{ object.caption }}
+{% else %}
+    {{ object.image.url }}
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+Image: 
+{% if object.caption %}
+    {{ object.caption }}
+{% else %}
+    {{ object.image.url }}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="vavs-img">
+<img src="{{ object.image.url }}" width="{{ object.width }}" height="{{ object.height }}">
+{% if object.caption %}<p>{{ object.caption }}</p>{% endif %}
+</div>
+<div>
+    <ul class="vavs-controls pull-right">
+    {% if user.is_staff %}
+    <li><a class="vavs-btn" href="{% url 'update_gallery_image' object.pk %}">Edit</a></li>
+    {% endif %}
+    </ul>
+</div>
+
+{% endblock %}

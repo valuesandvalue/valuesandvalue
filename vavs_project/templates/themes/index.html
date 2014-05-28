@@ -1,0 +1,46 @@
+{# themes/index.html #}
+{% extends "page_base.html" %}
+{% load bootstrap_pagination %}
+
+{% block title %}Themes{% endblock %}
+
+{% block page_title %}Themes{% endblock page_title %}
+
+{% block content %}
+{% if user.is_staff %}
+    <div class="vavs-control-box">
+    <span class="vavs-control-label pull-left">Controls:</span>
+    <ul class="vavs-controls pull-right">
+    <li><a class="vavs-control-btn" href="{% url 'create_theme' %}">Add new theme</a></li>
+    </ul>
+    </div>
+{% endif %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="theme_index_paginated" %}
+{% endif %}
+</div>
+
+{% for object in object_list %}
+<article>
+    <header>
+        <h1><a href="{{ object.get_absolute_url }}">{{ object.name }}</a></h1>
+    </header>
+    {{ object.bodyhtml|safe|truncatewords_html:72 }}
+    <footer>
+        <a class="vavs-btn pull-right" href="{{ object.get_absolute_url }}">Read more</a>
+    </footer>
+</article>
+{% empty %}
+<div class="text-center"><p>There are currently no themes listed.</p></div>
+{% endfor %}
+
+<div class="vavs-pager">
+{% if page_obj.paginator.num_pages > 1 %}
+{% bootstrap_paginate page_obj range=5 url_view_name="theme_index_paginated" %}
+{% endif %}
+</div>
+
+{% endblock %}
+

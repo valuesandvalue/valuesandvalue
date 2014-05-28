@@ -1,0 +1,38 @@
+{# themes/theme.html #}
+{% extends "page_base.html" %}
+
+{% block title %}
+{% if object.display or user.is_staff %}
+    {{ object.name }}
+{% else %}
+    Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_title %}
+{% if object.display or user.is_staff %}
+    {{ object.name }}
+{% else %}
+    Item not available
+{% endif %}
+{% endblock %}
+
+{% block page_subtitle %}
+<div class="text-center">
+<p class="vavs-page-subtitle-info"><a class="vavs-btn" href="{% url 'theme_index'%}">View All Themes</a></p>
+</div>
+{% endblock page_subtitle %}
+
+{% block content %}
+
+{% if object.display or user.is_staff %}
+    {{ object.bodyhtml|safe }}
+{% else %}
+    <p>This item is not available for viewing.</p>
+{% endif %}
+
+{% if user.is_staff %}
+    <p><a class="vavs-btn pull-right" href="{% url 'update_theme' object.pk %}">Edit</a></p>
+{% endif %}
+
+{% endblock %}

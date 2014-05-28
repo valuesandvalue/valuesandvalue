@@ -1,0 +1,24 @@
+{# blog/item_edit.html #}
+{% extends "page_base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    {% if object %}Edit {{ object.title }}{% else %}Create News Item{% endif %}
+{% endblock %}
+{% block page_title %}
+    {% if object %}
+        <span class="category">Edit: </span>
+        <span class="title">{{ object.title }}</span>
+    {% else %}Create News Item{% endif %}
+{% endblock page_title %}
+{% block content %}
+{% crispy form %}
+
+{% comment %}
+<form method="post" action="">
+{% csrf_token %}
+{{ form.as_p }}
+<p><input type="submit" value="Submit" /></p>
+</form>
+{% endcomment %}
+
+{% endblock %}
